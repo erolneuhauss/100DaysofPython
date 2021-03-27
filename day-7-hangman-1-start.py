@@ -21,3 +21,15 @@ if guess in chosen_word:
     print(guess, f" is in the word")
 else:
     print(f"You have guessed wrong")
+print(f"-----------------------------")
+matched_indexes = []
+index = 0
+length = len(chosen_word)
+
+while index < length:
+    if guess == chosen_word[index]:
+        print("Right")
+        matched_indexes.append(index)
+    else:
+        print("Wrong")
+    index += 1
