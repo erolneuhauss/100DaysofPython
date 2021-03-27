@@ -13,6 +13,11 @@ print(chosen_word)
 # and assign their answer to a variable called guess. Make guess lowercase.
 guess = input(f"Guess a letter: ")
 guess = guess.lower()
+print(f"Your have guessed:", guess)
 
 # TODO-3 - Check if the letter the user guessed (guess)
 # is one of the letters in the chosen_word
+if guess in chosen_word:
+    print(guess, f" is in the word")
+else:
+    print(f"You have guessed wrong")
