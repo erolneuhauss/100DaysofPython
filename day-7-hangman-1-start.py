@@ -20,10 +20,10 @@ if guess in chosen_word:
     print(guess, f" is in the word")
 else:
     print(f"You have guessed wrong")
-print(f"-----------------------------")
 
 # Finding all indexes of a string in the list
 # with while loop
+print(f"----- while loop -----")
 matched_indexes = []
 index = 0
 length = len(chosen_word)
@@ -34,3 +34,11 @@ while index < length:
     else:
         print("Wrong")
     index += 1
+
+print(f"----- for loop -------")
+# with for loop
+for letter in chosen_word:
+    if letter == guess:
+        print("Right")
+    else:
+        print("Wrong")
