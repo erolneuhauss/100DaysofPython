@@ -11,8 +11,7 @@ print(chosen_word)
 
 # TODO-2 - Ask the user to guess a letter
 # and assign their answer to a variable called guess. Make guess lowercase.
-guess = input(f"Guess a letter: ")
-guess = guess.lower()
+guess = input(f"Guess a letter: ").lower()
 print(f"Your have guessed:", guess)
 
 # TODO-3 - Check if the letter the user guessed (guess)
@@ -22,10 +21,12 @@ if guess in chosen_word:
 else:
     print(f"You have guessed wrong")
 print(f"-----------------------------")
+
+# Finding all indexes of a string in the list
+# with while loop
 matched_indexes = []
 index = 0
 length = len(chosen_word)
-
 while index < length:
     if guess == chosen_word[index]:
         print("Right")
