@@ -35,10 +35,18 @@ while index < length:
         print("Wrong")
     index += 1
 
-print(f"----- for loop -------")
+print(f"----- for loop if equal --")
 # with for loop
 for letter in chosen_word:
     if letter == guess:
+        print("Right")
+    else:
+        print("Wrong")
+
+print(f"----- for loop if in -----")
+# with for loop
+for letter in chosen_word:
+    if letter in guess:
         print("Right")
     else:
         print("Wrong")
