@@ -25,4 +25,4 @@ while '_' in display:
         if letter == guess:
             display[position] = letter
     print(display)
-print(display)
+print(display, "You have won!")
