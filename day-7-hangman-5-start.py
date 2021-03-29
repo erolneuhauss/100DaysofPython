@@ -21,7 +21,6 @@ print(f'Pssst, the solution is {chosen_word}.')
 
 # Create blanks
 display = []
-guessed_letter = []
 for _ in range(word_length):
     display += "_"
 
@@ -30,20 +29,19 @@ while not end_of_game:
 
     # TODO-4: - If the user has entered a letter they've already guessed, print the letter and let them know.
 
-    if guess in guessed_letter:
-        print("You have guessed", guess, "already!")
+    if guess in display:
+        print(f"You have guessed {guess}, already!")
     # Check guessed letter
     for position in range(word_length):
         letter = chosen_word[position]
 #        print(f"Current position: {position}\n Current letter: {letter}\n Guessed letter: {guess}")
         if letter == guess:
             display[position] = letter
-            guessed_letter.append(letter)
 
     # Check if user is wrong.
     if guess not in chosen_word:
         # TODO-5: - If the letter is not in the chosen_word, print out the letter and let them know it's not in the word.
-        print(guess, "is not in the word, sorry")
+        print(f"{guess}, is not in the word, sorry. You lose a life!")
         lives -= 1
         if lives == 0:
             end_of_game = True
