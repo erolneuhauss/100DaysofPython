@@ -65,7 +65,7 @@ word_list = ["ardvark", "baboon", "camel"]
 chosen_word = random.choice(word_list)
 word_length = len(chosen_word)
 
-# TODO-1: - Create a variable called 'lives' to keep track of the number of lives left. 
+# TODO-1: - Create a variable called 'lives' to keep track of the number of lives left.
 # Set 'lives' to equal 6.
 
 # Testing code
@@ -87,7 +87,7 @@ while not end_of_game:
             display[position] = letter
 
     # TODO-2: - If guess is not a letter in the chosen_word,
-    # Then reduce 'lives' by 1. 
+    # Then reduce 'lives' by 1.
     # If lives goes down to 0 then the game should stop and it should print "You lose."
 
     # Join all the elements in the list and turn it into a String.
