@@ -37,6 +37,7 @@ formated_string = format_name_d("tOm", "riCE")
 print(formated_string)
 
 def format_name_e(f_name,l_name):
+    """Takes two strings and formats into titles"""
     if f_name == "" or l_name == "":
         return "You didn't provide valid inputs."
     formated_f_name = f_name.title()
@@ -45,4 +46,3 @@ def format_name_e(f_name,l_name):
 
 print(format_name_e(input("What is your first name?"),
     input("What is your last name? ")))
-
