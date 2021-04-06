@@ -18,11 +18,11 @@ greet_a("Erol")
 greet_a("Angela")
 print("--------------------------")
 
-def greet_with(sender, receiver):
+def greet_with_a(sender, receiver):
     print(f"Hello, {receiver}!")
     print(f"I am {sender}")
     print("How are you doing?")
-greet_with("Erol", "Angela")
+greet_with_a("Erol", "Angela")
 print("--------------------------")
 
 def greet_with(sender, receiver):
