@@ -1,20 +1,22 @@
 #!/usr/bin/env python
 import random
+from diverse_logos import number_guessing_logo
 
+print(number_guessing_logo)
 print("Welcome to the Number Guessing Game!")
-
 
 def difficulty():
     """
     Ask user to choose between difficulty level 'easy' and 'hard'
     """
+    userChoice = ''
     try:
         userChoice = input("Choose a difficulty. Type 'easy' or 'hard': ")
-        if userChoice == 'easy':
-            attempts = 10
+        if userChoice == 'hard':
+            attempts = 5
             return attempts
         else:
-            attempts = 5
+            attempts = 10
             return attempts
     except:
         print(f"You have typed '{userChoice}'. Type 'easy' or 'hard': ")
@@ -32,7 +34,7 @@ def guessNumber(attempts):
                 print("Too high.")
                 attempts -= 1
                 if attempts == 0:
-                    print(f"You lose. I was thinking of {computerNum}.")
+                    print(f"You lose! 😱 I was thinking of {computerNum}.")
                     break
                 else:
                     print("Guess again!")
@@ -40,18 +42,18 @@ def guessNumber(attempts):
                 print("Too Low.")
                 attempts -= 1
                 if attempts == 0:
-                    print(f"You lose. I was thinking of {computerNum}.")
+                    print(f"You lose! 😱 I was thinking of {computerNum}.")
                     break
                 else:
                     print("Guess again!")
             else:
-                print("You guessed right")
+                print("You guessed right. You won 😃")
                 break
-        except ValueError as err:
+        except ValueError:
             if not userGuess:
-                print('You have not entered anything!')
+                print('You have not entered anything! Type a number.')
             else:
-                print(f"Error: {err}. Type a number between 1 and 100")
+                print(f"You've typed '{userGuess}'. Type a number instead")
 
 exit_game = False
 
