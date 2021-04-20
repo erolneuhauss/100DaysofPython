@@ -33,7 +33,7 @@ def check_answer(guess, a_followers, b_followers):
 
 # Display art
 print(higher_lower_logo)
-score = 0
+SCORE = 0
 game_should_continue = True
 account_b = random.choice(data)
 
@@ -66,8 +66,8 @@ while game_should_continue:
     # Give user feedback on their guess.
     # Score keeping.
     if is_correct:
-        score += 1
-        print(f"You're right! Current score: {score}")
+        SCORE += 1
+        print(f"You're right! Current score: {SCORE}")
     else:
         game_should_continue = False
-        print(f"Sorry, that's wrong. Your final score: {score}")
+        print(f"Sorry, that's wrong. Your final score: {SCORE}")
