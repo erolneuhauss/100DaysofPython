@@ -2,22 +2,29 @@
 
 import os
 import random
+
 from diverse_logos import higher_lower_logo, higher_lower_vs
 from game_data import data
 
 
 def format_data(account):
-    """Format the account data and return into printable format."""
+    """
+    Format the account data and return into printable format.
+    """
     account_name = account["name"]
     account_desc = account["description"]
     account_country = account["country"]
     account_follower_count = account["follower_count"]
-    return f"{account_name}, a {account_desc}, from {account_country}" \
-           f"(Pss! Hint: Follower count: {account_follower_count})"
+    return (
+        f"{account_name}, a {account_desc}, from {account_country}"
+        f"(Pss! Hint: Follower count: {account_follower_count})"
+    )
 
 
 def check_answer(guess, a_followers, b_followers):
-    """Take the user guess and followers count and returns if they got it right"""
+    """
+    Take the user guess and followers count and returns if they got it right
+    """
     if a_followers > b_followers:
         return guess == "a"
     else:
@@ -53,7 +60,7 @@ while game_should_continue:
     ## Use if statement to check if user is correct.
     is_correct = check_answer(guess, a_follower_count, b_follower_count)
     # Clear the screen
-    os.system('cls||clear')
+    os.system("cls||clear")
     print(higher_lower_logo)
 
     # Give user feedback on their guess.
