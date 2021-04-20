@@ -1,23 +1,9 @@
 #!/usr/bin/env python
 
 import os
-from diverse_logos import higher_lower_logo, higher_lower_vs
 from random import choice
+from diverse_logos import higher_lower_logo, higher_lower_vs
 from game_data import data
-
-def source():
-    """
-    generate a source to compare target with
-    """
-    A = choice(data)
-    return A
-
-def target():
-    """
-    generate a target to compare source with
-    """
-    B = choice(data)
-    return B
 
 def determine_answer(A, B):
     """
@@ -32,12 +18,12 @@ def determine_answer(A, B):
 
 score = 0
 is_game_over = False
-A = source()
+A = choice(data)
 while not is_game_over:
     print(higher_lower_logo)
     print(f"\nCompare A: {A['name']}, {A['description']}, {A['country']}, {A['follower_count']}.")
     print(higher_lower_vs)
-    B = target()
+    B = choice(data)
     print(f"Against B: {B['name']}, {B['description']}, {B['country']}, {B['follower_count']}.")
     guess = input("Who has more followers? Type 'A' or 'B': ")
     answer = determine_answer(A, B)
