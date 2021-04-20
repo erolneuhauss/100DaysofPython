@@ -34,11 +34,11 @@ def check_answer(guess, a_followers, b_followers):
 # Display art
 print(higher_lower_logo)
 SCORE = 0
-game_should_continue = True
+GAME_SHOULD_CONTINUE = True
 account_b = random.choice(data)
 
 # Make the game repeatable.
-while game_should_continue:
+while GAME_SHOULD_CONTINUE:
     # Generate a random account from the game data.
     # Make account at position B become the next account at position A.
     account_a = account_b
@@ -69,5 +69,5 @@ while game_should_continue:
         SCORE += 1
         print(f"You're right! Current score: {SCORE}")
     else:
-        game_should_continue = False
+        GAME_SHOULD_CONTINUE = False
         print(f"Sorry, that's wrong. Your final score: {SCORE}")
