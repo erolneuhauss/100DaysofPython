@@ -54,10 +54,10 @@ while game_should_continue:
     guess = input("Who has more followers? Type 'A' or 'B': ").lower()
 
     # Check if user is correct.
-    ## Get follower_count count of each account.
+    # Get follower_count count of each account.
     a_follower_count = account_a["follower_count"]
     b_follower_count = account_b["follower_count"]
-    ## Use if statement to check if user is correct.
+    # Use if statement to check if user is correct.
     is_correct = check_answer(guess, a_follower_count, b_follower_count)
     # Clear the screen
     os.system("cls||clear")
