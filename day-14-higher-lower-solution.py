@@ -25,3 +25,4 @@ from game_data import data
 
 # Make account at position B become the next account at position A.
 
+# Clear the screen
