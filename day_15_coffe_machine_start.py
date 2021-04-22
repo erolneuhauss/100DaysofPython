@@ -5,12 +5,20 @@ https://replit.com/@appbrewery/coffee-machine-final?embed=1&output=1#main.py
 """
 from day_15_coffe_machine_data import MENU, resources
 
-# TODO: Prompt user by asking "What would you like? (espresso/latte/cappucino)"
-userInput = input("What would you like? (espresso/latte/cappucino) ")
 
-if userInput.startswith("e"):
-    order = "espresso"
-print(f"You have ordered {order}")
+# TODO: Check which action to take
+def takeAction():
+    if userInput.startswith("e"):
+        order = "espresso"
+        print(f"You have ordered {order}")
+        return order
+
+
+# TODO: Prompt user by asking "What would you like? (espresso/latte/cappucino)"
+# TODO: Prompt should show every time when an action is completed (LOOP)
+userInput = input("What would you like? (espresso/latte/cappuccino) ")
+
+order = takeAction()
 
 # TODO: Print report by entering "report",
 #       which reveals coffee machines resources
@@ -56,8 +64,8 @@ insertedQuaters = int(input("how many quaters? "))
 insertedDimes = int(input("how many dimes? "))
 insertedNickles = int(input("how many nickles? "))
 insertedPennies = int(input("how many pennies? "))
-# TODO: Calculate monetary value of inserted coins
 
+# TODO: Calculate monetary value of inserted coins
 totalAmountInserted = round(
     insertedQuaters * quaters
     + insertedDimes * dimes
