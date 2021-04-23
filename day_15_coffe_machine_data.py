@@ -31,7 +31,7 @@ resources = {
     "coffee": 100,
 }
 
-coinTypes = {
+coin_types = {
     "quaters": 0.25,
     "dimes": 0.10,
     "nickles": 0.05,
