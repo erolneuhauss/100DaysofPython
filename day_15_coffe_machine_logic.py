@@ -5,10 +5,9 @@ from day_15_coffe_machine_data import MENU, coinTypes, resources
 resources.setdefault("money", 0)
 
 
-# TODO: Check which action to take
-# TODO: Exit emulator by entering "off"
+# Check which action to take
 def takeAction(userInput):
-    print("Taking action: ")
+    """Evalute what action to take: turn off, print report or prepare drink"""
     if userInput == "off":
         return 1
     elif userInput.startswith("r"):  # report
@@ -24,9 +23,9 @@ def takeAction(userInput):
         return drink
 
 
-# TODO: Print report by entering "report",
+# Print report by entering "report",
 def generateReport():
-
+    """Generate report"""
     water = resources["water"]
     milk = resources["milk"]
     coffee = resources["coffee"]
@@ -41,35 +40,33 @@ def generateReport():
     )
 
 
-# TODO: Check resources, when user chooses a drink
+# Check resources, when user chooses a drink
 def checkOrderedDrinkAgainstResources(drink):
-    print("Check resources for: ")
-    print(MENU.get(drink)["ingredients"])
+    """Check resources, when user chooses a drink"""
     selected_ingredients = MENU.get(drink)["ingredients"]
     for ingredient in selected_ingredients:
         amount = selected_ingredients[ingredient]
-        print(ingredient, amount)
         if amount > resources[ingredient]:
             print(
-                f"{amount} needed vs. {resources[ingredient]} available.\n"
+                f"{amount} units of {ingredient} needed but only "
+                f"{resources[ingredient]} units available 😭.\n"
                 f"Sorry, there is not enough {ingredient}. "
                 "Call service for refill."
             )
             return 0
         else:
-            print(f"{amount} needed vs. {resources[ingredient]} available. ")
-            print("Will continue")
             return 1
 
 
-# TODO: Process coins: amounts of quaters, dimes, nicles and pennies
+# Process coins: amounts of quaters, dimes, nicles and pennies
 def processCoins(drink):
+    """Handles inserted coins"""
     costOfDrink = MENU[drink]["cost"]
     costWith2Decimals = "{:.2f}".format(costOfDrink)
 
     totalAmountInserted = 0
     print(f"Please insert coins worth of ${costWith2Decimals}:")
-    # TODO: Calculate monetary value of inserted coins
+    # Calculate monetary value of inserted coins
     for type, value in coinTypes.items():
         try:
             insertedCoins = int(input(f"how many {type} (${value})? "))
@@ -78,8 +75,9 @@ def processCoins(drink):
             amountLeftToPay = costOfDrink - totalAmountInserted
             amountLeftWith2Decimals = "{:.2f}".format(amountLeftToPay)
             print(f"Sum: ${totalWith2Decimals}")
+            # Check transaction successful
             if totalAmountInserted >= costOfDrink:
-                # TODO: profit: add cost of drink to resources["money"]
+                # You've made profit. Add cost of drink to resources["money"]
                 resources["money"] += costOfDrink
                 break
             else:
@@ -87,8 +85,7 @@ def processCoins(drink):
         except (TypeError, ValueError):
             continue
 
-    # TODO: Check transaction successful
-    # TODO: offer change, in case the user has inserted too much money
+    # offer change, in case the user has inserted too much money
     if totalAmountInserted == 0:
         print("You did not insert any coins. No coffee for you then.")
     elif totalAmountInserted == costOfDrink:
@@ -108,8 +105,9 @@ def processCoins(drink):
         return 2
 
 
-# TODO: Deduce ingredients to make the coffee
+# Deduce ingredients to make the coffee
 def deduceIngredients(drink):
+    """Deduces ingredients to make the coffee"""
     print("Deduce ingredients")
     selected_ingredients = MENU.get(drink)["ingredients"]
     for ingredient in selected_ingredients:
@@ -118,10 +116,11 @@ def deduceIngredients(drink):
         resources[ingredient] = resources[ingredient] - consumed_ingredient
 
 
+# Start of program
 machineTurnedOn = True
-# TODO: Prompt should show every time when an action is completed (LOOP)
+# Prompt shows every time when an action is completed
 while machineTurnedOn:
-    # TODO: Prompt user: "What would you like? (espresso/latte/cappucino)"
+    # Prompt user: "What would you like? (espresso/latte/cappucino)"
     userInput = input("What would you like? (espresso/latte/cappuccino) ")
     nonDrinkAction = takeAction(userInput)
     if nonDrinkAction is None:
@@ -142,5 +141,5 @@ while machineTurnedOn:
                 continue  # empty string restarts if-control from the top
             elif sufficientCoins <= 1:
                 deduceIngredients(drink)
-                # TODO: Print: "Here is your [coffee product]. Enjoy!"
+                # End of program
                 print(f"Here is your {drink} ☕. Enjoy")
