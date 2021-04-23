@@ -1,47 +1,47 @@
 """Virtual Coffee Machine"""
-from day_15_coffe_machine_data import MENU, coinTypes, resources
+from day_15_coffe_machine_data import MENU, coin_types, resources
 
 # in the begining there is no resources["money"], therefore set a default
 resources.setdefault("money", 0)
 
 
 # Check which action to take
-def takeAction(userInput):
+def take_action(action):
     """Evalute what action to take: turn off, print report or prepare drink"""
-    if userInput == "off":
+    if action == "off":
         return 1
-    elif userInput.startswith("r"):  # report
+    if action.startswith("r"):  # report
         return 2
-    elif userInput.startswith("e"):
+    if action.startswith("e"):
         drink = "espresso"
         return drink
-    elif userInput.startswith("l"):
+    if action.startswith("l"):
         drink = "latte"
         return drink
-    elif userInput.startswith("c"):
+    if action.startswith("c"):
         drink = "cappuccino"
         return drink
 
 
 # Print report by entering "report",
-def generateReport():
+def generate_report():
     """Generate report"""
     water = resources["water"]
     milk = resources["milk"]
     coffee = resources["coffee"]
     money = resources["money"]
-    moneyWith2Decimals = "{:.2f}".format(money)
+    money_with_2_decimals = "{:.2f}".format(money)
 
     print(
         f"Water: {water}ml\n"
         f"Milk: {milk}ml\n"
         f"Coffee: {coffee}g\n"
-        f"Money: ${moneyWith2Decimals}"
+        f"Money: ${money_with_2_decimals}"
     )
 
 
 # Check resources, when user chooses a drink
-def checkOrderedDrinkAgainstResources(drink):
+def check_ordered_drink_against_resources(drink):
     """Check resources, when user chooses a drink"""
     selected_ingredients = MENU.get(drink)["ingredients"]
     for ingredient in selected_ingredients:
@@ -54,49 +54,47 @@ def checkOrderedDrinkAgainstResources(drink):
                 "Call service for refill."
             )
             return 0
-        else:
-            return 1
+        return 1
 
 
 # Process coins: amounts of quaters, dimes, nicles and pennies
-def processCoins(drink):
+def process_coins(drink):
     """Handles inserted coins"""
-    costOfDrink = MENU[drink]["cost"]
-    costWith2Decimals = "{:.2f}".format(costOfDrink)
+    cost_of_drink = MENU[drink]["cost"]
+    cost_with_2_decimals = "{:.2f}".format(cost_of_drink)
 
-    totalAmountInserted = 0
-    print(f"Please insert coins worth of ${costWith2Decimals}:")
+    total_amount_inserted = 0
+    print(f"Please insert coins worth of ${cost_with_2_decimals}:")
     # Calculate monetary value of inserted coins
-    for type, value in coinTypes.items():
+    for coin_type, value in coin_types.items():
         try:
-            insertedCoins = int(input(f"how many {type} (${value})? "))
-            totalAmountInserted += insertedCoins * value
-            totalWith2Decimals = "{:.2f}".format(totalAmountInserted)
-            amountLeftToPay = costOfDrink - totalAmountInserted
-            amountLeftWith2Decimals = "{:.2f}".format(amountLeftToPay)
-            print(f"Sum: ${totalWith2Decimals}")
+            inserted_coins = int(input(f"how many {coin_type} (${value})? "))
+            total_amount_inserted += inserted_coins * value
+            total_with_2_decimals = "{:.2f}".format(total_amount_inserted)
+            amount_left_to_pay = cost_of_drink - total_amount_inserted
+            amount_left_with_2_decimals = "{:.2f}".format(amount_left_to_pay)
+            print(f"Sum: ${total_with_2_decimals}")
             # Check transaction successful
-            if totalAmountInserted >= costOfDrink:
+            if total_amount_inserted >= cost_of_drink:
                 # You've made profit. Add cost of drink to resources["money"]
-                resources["money"] += costOfDrink
+                resources["money"] += cost_of_drink
                 break
-            else:
-                print(f"Remaining amount to pay: ${amountLeftWith2Decimals}")
+            print(f"Remaining amount to pay: ${amount_left_with_2_decimals}")
         except (TypeError, ValueError):
             continue
 
     # offer change, in case the user has inserted too much money
-    if totalAmountInserted == 0:
+    if total_amount_inserted == 0:
         print("You did not insert any coins. No coffee for you then.")
-    elif totalAmountInserted == costOfDrink:
+    elif total_amount_inserted == cost_of_drink:
         print("Thank you. Preparing your coffee now.")
         return 0
-    elif amountLeftToPay < 0:
-        change = amountLeftToPay * -1
-        changeWith2Decimals = "{:.2f}".format(change)
+    elif amount_left_to_pay < 0:
+        change = amount_left_to_pay * -1
+        change_with_2_decimals = "{:.2f}".format(change)
         print(
             "Thank you for your order."
-            f" Here is ${changeWith2Decimals} in change."
+            f" Here is ${change_with_2_decimals} in change."
             " Preparing your coffee now."
         )
         return 1
@@ -106,7 +104,7 @@ def processCoins(drink):
 
 
 # Deduce ingredients to make the coffee
-def deduceIngredients(drink):
+def deduce_ingredients(drink):
     """Deduces ingredients to make the coffee"""
     print("Deduce ingredients")
     selected_ingredients = MENU.get(drink)["ingredients"]
@@ -117,29 +115,27 @@ def deduceIngredients(drink):
 
 
 # Start of program
-machineTurnedOn = True
+MACHINE_ON = True
 # Prompt shows every time when an action is completed
-while machineTurnedOn:
+while MACHINE_ON:
     # Prompt user: "What would you like? (espresso/latte/cappucino)"
-    userInput = input("What would you like? (espresso/latte/cappuccino) ")
-    nonDrinkAction = takeAction(userInput)
-    if nonDrinkAction is None:
+    user_input = input("What would you like? (espresso/latte/cappuccino) ")
+    non_drink_action = take_action(user_input)
+    if non_drink_action is None:
         continue  # empty string restarts if-control from the top
-    elif nonDrinkAction == 1:
-        machineTurnedOn = False
+    if non_drink_action == 1:
+        MACHINE_ON = False
         print("Turning off machine for maintenance")
-    elif nonDrinkAction == 2:
-        print("Printing out Report.")
-        generateReport()
+    elif non_drink_action == 2:
+        generate_report()
     else:
-        drink = takeAction(userInput)
-        print(f"Processing your {drink}")
-        resourcesReady = checkOrderedDrinkAgainstResources(drink)
-        if resourcesReady == 1:
-            sufficientCoins = processCoins(drink)
-            if sufficientCoins is None:
+        DRINK = take_action(user_input)
+        RESOURCES_READY = check_ordered_drink_against_resources(DRINK)
+        if RESOURCES_READY == 1:
+            SUFFICIENT_COINS = process_coins(DRINK)
+            if SUFFICIENT_COINS is None:
                 continue  # empty string restarts if-control from the top
-            elif sufficientCoins <= 1:
-                deduceIngredients(drink)
+            if SUFFICIENT_COINS <= 1:
+                deduce_ingredients(DRINK)
                 # End of program
-                print(f"Here is your {drink} ☕. Enjoy")
+                print(f"Here is your {DRINK} ☕. Enjoy")
