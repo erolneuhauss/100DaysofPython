@@ -119,7 +119,7 @@ MACHINE_ON = True
 # Prompt shows every time when an action is completed
 while MACHINE_ON:
     # Prompt user: "What would you like? (espresso/latte/cappucino)"
-    user_input = input("What would you like? (espresso/latte/cappuccino) ")
+    user_input = input("What would you like? (espresso/latte/cappuccino): ")
     non_drink_action = take_action(user_input)
     if non_drink_action is None:
         continue  # empty string restarts if-control from the top
